@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
-public class ProducerDemoCallBacks {
+public class ProducerDemoCallBack {
     public static void main(String[] args) {
 
-        Logger logger =  LoggerFactory.getLogger(ProducerDemoCallBacks.class);
+        Logger logger =  LoggerFactory.getLogger(ProducerDemoCallBack.class);
 
         String bootstrapServer = "127.0.0.1:9092";
 

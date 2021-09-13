@@ -7,10 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
-public class ProducerDemoCallBack {
+public class ProducerDemo {
     public static void main(String[] args) {
-        System.out.println("Hello from java");
-        Logger logger =  LoggerFactory.getLogger(ProducerDemoCallBack.class);
+
         String bootstrapServer = "127.0.0.1:9092";
         Properties properties =  new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
@@ -22,26 +21,10 @@ public class ProducerDemoCallBack {
         for(int i=0; i<10; i++){
             ProducerRecord<String,String> record = new ProducerRecord("first_topic", "Hello World from Java with callback! "+ i);
 
-            kafkaProducer.send(record, new Callback() {
-                @Override
-                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                    if(e == null){
-                        logger.info("Record Successfully produced: \n"+
-                                "Topic: "+recordMetadata.topic()+"\n"+
-                                "Offset: "+recordMetadata.offset()+"\n"+
-                                "Partition: "+recordMetadata.partition()+"\n"+
-                                "Timestamp:"+recordMetadata.partition());
-                    }
-                    else {
-                        logger.error("Error while producing "+e);
-                    }
-                }
-            });
-
-            kafkaProducer.flush();
+            kafkaProducer.send(record);
         }
 
+        kafkaProducer.flush();
         kafkaProducer.close();
-
     }
 }

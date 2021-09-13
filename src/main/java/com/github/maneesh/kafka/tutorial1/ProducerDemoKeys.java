@@ -6,11 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
-public class ProducerDemoCallKeys {
-    public static void main(String[] args) {
+public class ProducerDemoKeys {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        Logger logger =  LoggerFactory.getLogger(ProducerDemoCallKeys.class);
+        Logger logger =  LoggerFactory.getLogger(ProducerDemoKeys.class);
 
         String bootstrapServer = "127.0.0.1:9092";
 
@@ -40,7 +41,7 @@ public class ProducerDemoCallKeys {
                 else {
                     logger.error("Error while producing "+e);
                 }
-            });
+            }).get();
 
         }
 
